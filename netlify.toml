@@ -1,0 +1,22 @@
+[build]
+  command = "npm install && npm run build"
+  publish = "build"
+
+# Handle SPA routing (redirect all paths to index.html)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Set cache headers for static assets
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Environment variables can be added here
+[build.environment]
+  BROWSER = "none"
+  PORT = "3000"
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--legacy-peer-deps"
